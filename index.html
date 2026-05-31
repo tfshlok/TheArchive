@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Absolute Cinema</title>
+
+<link rel="icon" href="assets/mahoraga.png">
+
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@700,600&f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <div class="logo">
+
+            <img
+                src="assets/mahoraga.png"
+                alt="Mahoraga"
+                class="logo-img"
+            >
+
+            <span>
+                Absolute Cinema
+            </span>
+
+        </div>
+
+        <div class="nav-links">
+
+            <button
+                class="nav-btn active"
+                data-category="movies">
+                Movies
+            </button>
+
+            <button
+                class="nav-btn"
+                data-category="shows">
+                Shows
+            </button>
+
+            <button
+                class="nav-btn"
+                data-category="anime">
+                Anime
+            </button>
+
+            <button
+                class="nav-btn"
+                data-category="animated">
+                Anime Movies
+            </button>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<section class="hero">
+
+    <div class="hero-left">
+
+        <div class="hero-badge">
+            PERSONAL MEDIA ARCHIVE
+        </div>
+
+        <h1 id="hero-title">
+            ANIME<br>
+            ARCHIVE
+        </h1>
+
+        <p id="hero-subtitle">
+            0 Titles
+        </p>
+
+    </div>
+
+    <div class="hero-card">
+
+        <div class="hero-card-title">
+            Collection Stats
+        </div>
+
+        <div class="stat-row">
+            <span>Total</span>
+            <span id="stat-total">0</span>
+        </div>
+
+        <div class="stat-row">
+            <span>Absolute Cinema</span>
+            <span id="stat-ac">0</span>
+        </div>
+
+        <div class="stat-row">
+            <span>Peak Fiction</span>
+            <span id="stat-pf">0</span>
+        </div>
+
+        <div class="stat-row">
+            <span>Watchable</span>
+            <span id="stat-watchable">0</span>
+        </div>
+
+        <div class="stat-row">
+            <span>Waste Of Time</span>
+            <span id="stat-wot">0</span>
+        </div>
+
+    </div>
+
+</section>
+
+<main class="main">
+
+    <section class="unwatched-wrapper">
+
+        <div class="section-header">
+
+            <div class="section-title">
+                UNWATCHED
+                <span id="unwatched-count">0</span>
+            </div>
+
+            <button
+                id="toggle-unwatched"
+                class="toggle-btn">
+                SHOW
+            </button>
+
+        </div>
+
+        <div
+            id="unwatched-grid"
+            class="poster-grid hidden">
+        </div>
+
+    </section>
+
+    <section
+        id="absolute-cinema-section"
+        class="tier-section">
+    </section>
+
+    <section
+        id="peak-fiction-section"
+        class="tier-section">
+    </section>
+
+    <section
+        id="watchable-section"
+        class="tier-section">
+    </section>
+
+    <section
+        id="waste-of-time-section"
+        class="tier-section">
+    </section>
+
+</main>
+
+<div
+    id="context-menu"
+    class="context-menu">
+
+    <button data-action="unwatched">
+        Unwatched
+    </button>
+
+    <button data-action="absolute-cinema">
+        Absolute Cinema
+    </button>
+
+    <button data-action="peak-fiction">
+        Peak Fiction
+    </button>
+
+    <button data-action="watchable">
+        Watchable
+    </button>
+
+    <button data-action="waste-of-time">
+        Waste Of Time
+    </button>
+
+</div>
+
+<script src="data.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>
