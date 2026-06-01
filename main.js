@@ -1,63 +1,58 @@
-const CATEGORY_LABELS = {
-    movies: "MOVIES",
-    shows: "SHOWS",
-    anime: "ANIME",
-    animated: "ANIME MOVIES"
-};
-
 let currentCategory = "anime";
 let selectedFile = null;
-
-/* ELEMENTS */
-
-const heroTitle =
-document.getElementById("hero-title");
-
-const heroSubtitle =
-document.getElementById("hero-subtitle");
+let watchlistVisible = false;
 
 const contextMenu =
-document.getElementById("context-menu");
+    document.getElementById(
+        "context-menu"
+    );
 
-const unwatchedGrid =
-document.getElementById("unwatched-grid");
+const watchlistGrid =
+    document.getElementById(
+        "unwatched-grid"
+    );
 
 const toggleBtn =
-document.getElementById("toggle-unwatched");
+    document.getElementById(
+        "toggle-unwatched"
+    );
 
-const unwatchedCount =
-document.getElementById("unwatched-count");
+watchlistGrid.style.display =
+    "none";
 
-/* STORAGE */
-
-function getState(){
+function getState() {
 
     return JSON.parse(
+
         localStorage.getItem(
             "absoluteCinemaState"
         )
+
     ) || {};
 }
 
-function saveState(state){
+function saveState(state) {
 
     localStorage.setItem(
+
         "absoluteCinemaState",
+
         JSON.stringify(state)
+
     );
 }
 
-function getFileState(file){
+function getFileState(file) {
 
     const state = getState();
 
-    if(!state[file]){
+    if (!state[file]) {
 
         state[file] = {
 
-            status:"unwatched",
+            status: "unwatched",
 
-            tier:null
+            tier: null
         };
 
         saveState(state);
@@ -66,19 +61,21 @@ function getFileState(file){
     return state[file];
 }
 
-function moveFile(file,target){
+function moveFile(file, target) {
 
     const state = getState();
 
-    if(!state[file]){
+    if (!state[file]) {
 
         state[file] = {
-            status:"unwatched",
-            tier:null
+
+            status: "unwatched",
+
+            tier: null
         };
     }
 
-    if(target === "unwatched"){
+    if (target === "unwatched") {
 
         state[file].status =
             "unwatched";
@@ -86,7 +83,7 @@ function moveFile(file,target){
         state[file].tier =
             null;
     }
-    else{
+    else {
 
         state[file].status =
             "watched";
@@ -100,349 +97,402 @@ function moveFile(file,target){
     render();
 }
 
-/* HELPERS */
-
-function imagePath(category,file){
+function imagePath(category, file) {
 
     return `assets/posters/${category}/${file}`;
 }
 
-function formatTitle(filename){
+function formatTitle(filename) {
 
     return filename
-        .replace(/\.[^/.]+$/,"")
+
+        .replace(/\.[^/.]+$/, "")
+
         .split("-")
+
         .map(word =>
-            word.charAt(0).toUpperCase() +
-            word.slice(1)
+
+            word.charAt(0)
+                .toUpperCase()
+
+            + word.slice(1)
+
         )
+
         .join(" ");
 }
 
-function createCard(category,file){
+function createCard(category, file) {
 
     const card =
-    document.createElement("div");
+        document.createElement("div");
 
     card.className =
-    "poster-card";
+        "poster-card";
 
     card.innerHTML = `
+
         <img
-            src="${imagePath(category,file)}"
+            src="${imagePath(
+        category,
+        file
+    )}"
             alt="${formatTitle(file)}"
         >
 
         <div class="poster-info">
+
             <div class="poster-title">
+
                 ${formatTitle(file)}
+
             </div>
+
         </div>
+
     `;
 
     card.addEventListener(
+
         "contextmenu",
+
         e => {
 
             e.preventDefault();
 
-            selectedFile = file;
+            selectedFile =
+                file;
+
+            const menuWidth =
+                230;
+
+            const menuHeight =
+                250;
+
+            let x =
+                e.clientX;
+
+            let y =
+                e.clientY;
+
+            if (
+
+                x + menuWidth >
+
+                window.innerWidth
+
+            ) {
+
+                x =
+
+                    window.innerWidth
+
+                    - menuWidth
+
+                    - 15;
+            }
+
+            if (
+
+                y + menuHeight >
+
+                window.innerHeight
+
+            ) {
+
+                y =
+
+                    window.innerHeight
+
+                    - menuHeight
+
+                    - 15;
+            }
 
             contextMenu.style.display =
-            "block";
+                "block";
 
             contextMenu.style.left =
-            e.pageX + "px";
+                x + "px";
 
             contextMenu.style.top =
-            e.pageY + "px";
+                y + "px";
         }
     );
 
     return card;
 }
 
-/* STATS */
-
-function updateStats(){
-
-    const files =
-    MEDIA[currentCategory] || [];
-
-    const state =
-    getState();
-
-    let ac = 0;
-    let pf = 0;
-    let watchable = 0;
-    let wot = 0;
-
-    files.forEach(file => {
-
-        const info =
-        state[file];
-
-        if(!info) return;
-
-        if(info.tier === "absolute-cinema")
-            ac++;
-
-        if(info.tier === "peak-fiction")
-            pf++;
-
-        if(info.tier === "watchable")
-            watchable++;
-
-        if(info.tier === "waste-of-time")
-            wot++;
-    });
-
-    document.getElementById(
-        "stat-total"
-    ).textContent = files.length;
-
-    document.getElementById(
-        "stat-ac"
-    ).textContent = ac;
-
-    document.getElementById(
-        "stat-pf"
-    ).textContent = pf;
-
-    document.getElementById(
-        "stat-watchable"
-    ).textContent = watchable;
-
-    document.getElementById(
-        "stat-wot"
-    ).textContent = wot;
-}
-
-/* SECTION */
-
 function renderTierSection(
-    containerId,
+
+    sectionId,
+
     title,
-    tierKey,
-    lineClass
-){
+
+    tierKey
+
+) {
 
     const section =
-    document.getElementById(
-        containerId
-    );
+        document.getElementById(
+            sectionId
+        );
 
     const files =
-    MEDIA[currentCategory] || [];
+        MEDIA[currentCategory] || [];
 
     const tierFiles =
-    files.filter(file => {
 
-        const info =
-        getFileState(file);
+        files.filter(file => {
 
-        return (
-            info.status === "watched" &&
-            info.tier === tierKey
-        );
-    });
+            const info =
+                getFileState(file);
+
+            return (
+
+                info.status ===
+                "watched"
+
+                &&
+
+                info.tier ===
+                tierKey
+
+            );
+        });
 
     section.innerHTML = `
-        <div class="tier-header">
 
-            <div class="tier-title">
+    <div class="tier-left">
 
-                ${title}
+        <div class="tier-title">
 
-                <span class="tier-count">
-                    ${tierFiles.length}
-                </span>
-
-            </div>
-
-            <div class="tier-line ${lineClass}">
-            </div>
+            ${title}
 
         </div>
 
-        <div class="poster-grid"></div>
+        <div class="tier-sub">
+
+            CURATED LIST
+        </div>
+
+    </div>
+
+    <div class="poster-grid">
+
+    </div>
+
     `;
 
     const grid =
-    section.querySelector(
-        ".poster-grid"
-    );
+
+        section.querySelector(
+            ".poster-grid"
+        );
 
     tierFiles.forEach(file => {
 
         grid.appendChild(
+
             createCard(
+
                 currentCategory,
+
                 file
+
             )
+
         );
     });
 }
 
-/* RENDER */
-
-function render(){
+function render() {
 
     const files =
-    MEDIA[currentCategory] || [];
 
-    heroTitle.innerHTML = `
-        ${CATEGORY_LABELS[currentCategory]}
-        <br>
-        ARCHIVE
-    `;
+        MEDIA[currentCategory]
 
-    heroSubtitle.textContent =
-    `${files.length} Titles`;
+        || [];
 
-    const unwatched =
-    files.filter(file => {
+    watchlistGrid.innerHTML =
+        "";
+
+    files.forEach(file => {
 
         const info =
-        getFileState(file);
+            getFileState(file);
 
-        return (
-            info.status === "unwatched"
-        );
-    });
+        if (
+            info.status ===
+            "unwatched"
+        ) {
 
-    unwatchedCount.textContent =
-    unwatched.length;
+            watchlistGrid.appendChild(
 
-    unwatchedGrid.innerHTML = "";
+                createCard(
 
-    unwatched.forEach(file => {
+                    currentCategory,
 
-        unwatchedGrid.appendChild(
-            createCard(
-                currentCategory,
-                file
-            )
-        );
+                    file
+
+                )
+
+            );
+        }
     });
 
     renderTierSection(
+
         "absolute-cinema-section",
-        "ABSOLUTE CINEMA",
-        "absolute-cinema",
-        "absolute-line"
+
+        "Absolute Cinema",
+
+        "absolute-cinema"
     );
 
     renderTierSection(
+
         "peak-fiction-section",
-        "PEAK FICTION",
-        "peak-fiction",
-        "peak-line"
+
+        "Peak Fiction",
+
+        "peak-fiction"
     );
 
     renderTierSection(
+
         "watchable-section",
-        "WATCHABLE",
-        "watchable",
-        "watchable-line"
+
+        "Watchable",
+
+        "watchable"
     );
 
     renderTierSection(
-        "waste-of-time-section",
-        "WASTE OF TIME",
-        "waste-of-time",
-        "waste-line"
-    );
 
-    updateStats();
+        "waste-of-time-section",
+
+        "Waste Of Time",
+
+        "waste-of-time"
+    );
 }
 
-/* NAVIGATION */
-
 document
-.querySelectorAll(".nav-btn")
-.forEach(btn => {
 
-    btn.addEventListener(
-        "click",
-        () => {
+    .querySelectorAll(
+        ".nav-btn"
+    )
 
-            document
-            .querySelectorAll(".nav-btn")
-            .forEach(x =>
-                x.classList.remove(
+    .forEach(btn => {
+
+        btn.addEventListener(
+
+            "click",
+
+            () => {
+
+                document
+
+                    .querySelectorAll(
+                        ".nav-btn"
+                    )
+
+                    .forEach(nav =>
+
+                        nav.classList.remove(
+                            "active"
+                        )
+
+                    );
+
+                btn.classList.add(
                     "active"
-                )
-            );
+                );
 
-            btn.classList.add(
-                "active"
-            );
+                currentCategory =
 
-            currentCategory =
-            btn.dataset.category;
+                    btn.dataset.category;
 
-            render();
+                render();
 
-            window.scrollTo({
-                top:0,
-                behavior:"smooth"
-            });
-        }
-    );
-});
+                window.scrollTo({
 
-/* UNWATCHED TOGGLE */
+                    top: 0,
+
+                    behavior: "smooth"
+                });
+            }
+        );
+    });
 
 toggleBtn.addEventListener(
+
     "click",
+
     () => {
 
-        unwatchedGrid.classList.toggle(
-            "hidden"
-        );
+        watchlistVisible =
+            !watchlistVisible;
+
+        watchlistGrid.style.display =
+
+            watchlistVisible
+
+                ? "grid"
+
+                : "none";
 
         toggleBtn.textContent =
-        unwatchedGrid.classList.contains(
-            "hidden"
-        )
-            ? "SHOW"
-            : "HIDE";
+
+            watchlistVisible
+
+                ? "Collapse"
+
+                : "Expand";
     }
 );
 
-/* CONTEXT MENU */
-
 document
-.querySelectorAll(
-    "#context-menu button"
-)
-.forEach(btn => {
 
-    btn.addEventListener(
-        "click",
-        () => {
+    .querySelectorAll(
+        "#context-menu button"
+    )
 
-            if(!selectedFile)
-                return;
+    .forEach(btn => {
 
-            moveFile(
-                selectedFile,
-                btn.dataset.action
-            );
+        btn.addEventListener(
 
-            contextMenu.style.display =
-            "none";
-        }
-    );
-});
+            "click",
+
+            () => {
+
+                if (
+                    !selectedFile
+                ) return;
+
+                moveFile(
+
+                    selectedFile,
+
+                    btn.dataset.action
+
+                );
+
+                contextMenu.style.display =
+                    "none";
+            }
+        );
+    });
 
 document.addEventListener(
+
     "click",
+
     () => {
 
         contextMenu.style.display =
-        "none";
+            "none";
     }
 );
 

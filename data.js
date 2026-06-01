@@ -48,7 +48,16 @@ const MEDIA = {
     "tokyo-revengers.png",
     "trapped-in-a-dating-sim.png",
     "vinland-saga.png",
-    "wind-breaker.jpg"
+    "wind-breaker.jpg",
+    "dr-stone.png",
+    "mushoku-tensei.png",
+    "one-piece.jpg",
+    "plunderer.png",
+    "no-longer-allowed-in-another-world.jpg",
+    "failure-frame.jpg",
+    "blue-exorcist.png",
+    "chained-soldier.png",
+    
   ],
 
   movies: [],
