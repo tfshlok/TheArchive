@@ -57,7 +57,22 @@ const MEDIA = {
     "failure-frame.jpg",
     "blue-exorcist.png",
     "chained-soldier.png",
-    
+    "another.png",
+    "berserk.png",
+    "frieren.jpg",
+    "hellsing.png",
+    "k-on.jpeg",
+    "kaguya-sama-love-is-war.png",
+    "monster.png",
+    "noragami.png",
+    "psycho-pass.jpeg",
+    "record-of-ragnarok.png",
+    "steins-gate.jpg",
+    "sword-art-online.jpeg",
+    "the-rising-of-the-shield-hero.jpg",
+    "tomodachi-game.png",
+    "zom-100.png",
+
   ],
 
   movies: [],

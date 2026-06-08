@@ -271,11 +271,6 @@ function renderTierSection(
 
         </div>
 
-        <div class="tier-sub">
-
-            CURATED LIST
-        </div>
-
     </div>
 
     <div class="poster-grid">

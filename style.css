@@ -95,131 +95,94 @@ button{
 }
 
 .nav{
-
     display:flex;
-
     justify-content:flex-end;
-
-    gap:55px;
+    gap:32px;
 }
 
 .nav-btn{
-
-    position:relative;
-
     border:none;
-
     background:none;
-
     color:var(--muted);
-
-    font-size:1rem;
-
-    font-weight:500;
-
+    font-size:.95rem;
+    font-weight:600;
+    letter-spacing:.4px;
     cursor:pointer;
-
-    transition:.3s;
+    position:relative;
+    transition:.25s;
 }
 
 .nav-btn:hover{
-
     color:white;
 }
 
 .nav-btn::after{
-
     content:"";
-
     position:absolute;
-
     left:0;
-    bottom:-10px;
-
+    bottom:-8px;
     width:0;
-
-    height:1px;
-
+    height:2px;
     background:var(--accent);
-
     transition:.3s;
 }
 
 .nav-btn:hover::after{
-
     width:100%;
 }
 
 .nav-btn.active{
-
     color:white;
 }
 
 .nav-btn.active::after{
-
     width:100%;
 }
 
-/* LANDING */
-
 .landing{
-
     width:min(92%,var(--max-width));
-
     margin:auto;
+    padding:90px 0 60px;
+}
 
-    padding-top:70px;
-
-    padding-bottom:50px;
+.hero-logo{
+    display:flex;
+    align-items:center;
+    gap:28px;
 }
 
 .hero-wheel{
-
-    width:70px;
-    height:70px;
-
+    width:120px;
+    height:120px;
     object-fit:contain;
-
-    margin-bottom:35px;
-
-    opacity:.9;
-
-    transition:1.2s ease;
+    opacity:.95;
+    transition:1.4s ease;
 }
 
 .hero-wheel:hover{
-
     transform:rotate(360deg);
 }
 
-.landing h1{
+.hero-title-wrap{
+    display:flex;
+    flex-direction:column;
+}
 
-    font-family:
-    'Bodoni Moda',
-    serif;
-
-    font-size:
-    clamp(4rem,8vw,6rem);
-
-    line-height:.82;
-
+.hero-title{
+    font-family:'Cinzel',serif;
+    font-size:clamp(4rem,7vw,6.5rem);
+    line-height:.9;
+    letter-spacing:-2px;
     font-weight:700;
-
-    letter-spacing:-4px;
 }
 
-.landing p{
-
-    margin-top:28px;
-
+.hero-subtitle{
+    margin-top:10px;
     color:var(--muted);
-
-    font-size:1rem;
-
-    max-width:500px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-size:.82rem;
 }
-
-/* CONTENT */
 
 .content{
 
@@ -276,66 +239,40 @@ button{
     letter-spacing:1px;
 }
 
-/* TIERS */
-
 .tier-section{
-
     display:grid;
-
-    grid-template-columns:
-    320px
-    1fr;
-
-    gap:40px;
-
+    grid-template-columns:260px 1fr;
+    gap:28px;
+    margin-bottom:70px;
     align-items:start;
-
-    margin-bottom:90px;
 }
 
 .tier-left{
-
     position:sticky;
-
-    top:120px;
+    top:110px;
+    align-self:start;
 }
 
 .tier-title{
-
-    font-family:
-    'Bodoni Moda',
-    serif;
-
-    font-size:4rem;
-
-    line-height:.9;
-
-    font-weight:700;
-
+    font-family:'Cinzel',serif;
+    font-size:3.8rem;
+    line-height:.85;
+    font-weight:600;
     color:white;
 }
 
-.tier-sub{
-
-    margin-top:12px;
-
+.tier-label{
+    margin-top:10px;
     color:var(--muted);
-
-    font-size:.85rem;
-
-    letter-spacing:2px;
-
+    font-size:.72rem;
+    letter-spacing:3px;
     text-transform:uppercase;
 }
 
 .poster-grid{
-
     display:grid;
-
-    grid-template-columns:
-    repeat(auto-fill,minmax(105px,1fr));
-
-    gap:14px;
+    grid-template-columns:repeat(auto-fill,minmax(95px,1fr));
+    gap:12px;
 }
 
 .poster-card{
@@ -403,7 +340,7 @@ button{
 
 .poster-title{
 
-    font-size:.88rem;
+    font-size:.78rem;
 
     font-weight:600;
 
