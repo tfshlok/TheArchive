@@ -72,6 +72,12 @@ const MEDIA = {
     "the-rising-of-the-shield-hero.jpg",
     "tomodachi-game.png",
     "zom-100.png",
+    "kaiju-no-8.png",
+    "lord-of-mysteries.jpg",
+    "reign-of-the-seven-spellblades.png",
+    "the-irregular-at-magic-high-school.jpg",
+    "wistoria-wand-and-sword.png",
+    "witch-hat-atelier.png",
 
   ],
 

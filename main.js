@@ -1,4 +1,4 @@
-let currentCategory = "anime";
+let currentCategory = "movies";
 let selectedFile = null;
 let watchlistVisible = false;
 
