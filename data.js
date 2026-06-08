@@ -150,6 +150,7 @@ const MEDIA = {
     "wednesday.png",
     "you.png",
     "young-sheldon.png",
+    "the-mentalist.png",
 
   ],
 

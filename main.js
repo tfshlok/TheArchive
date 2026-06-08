@@ -3,22 +3,16 @@ let selectedFile = null;
 let watchlistVisible = false;
 
 const contextMenu =
-    document.getElementById(
-        "context-menu"
-    );
+    document.getElementById("context-menu");
 
 const watchlistGrid =
-    document.getElementById(
-        "unwatched-grid"
-    );
+    document.getElementById("unwatched-grid");
 
 const toggleBtn =
-    document.getElementById(
-        "toggle-unwatched"
-    );
+    document.getElementById("toggle-unwatched");
 
-watchlistGrid.style.display =
-    "none";
+watchlistGrid.style.display = "none";
+toggleBtn.textContent = "Show Watchlist";
 
 function getState() {
 
@@ -421,32 +415,25 @@ document
         );
     });
 
-toggleBtn.addEventListener(
+toggleBtn.addEventListener("click", () => {
 
-    "click",
+    watchlistVisible = !watchlistVisible;
 
-    () => {
+    if (watchlistVisible) {
 
-        watchlistVisible =
-            !watchlistVisible;
+        watchlistGrid.style.display = "grid";
+        toggleBtn.textContent = "Hide Watchlist";
 
-        watchlistGrid.style.display =
+    } else {
 
-            watchlistVisible
+        watchlistGrid.style.display = "none";
+        toggleBtn.textContent = "Show Watchlist";
 
-                ? "grid"
-
-                : "none";
-
-        toggleBtn.textContent =
-
-            watchlistVisible
-
-                ? "Collapse"
-
-                : "Expand";
     }
-);
+
+});
+
+
 
 document
 

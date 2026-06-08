@@ -21,6 +21,7 @@
 
 html{
     scroll-behavior:smooth;
+    
 }
 
 body{
@@ -34,6 +35,7 @@ body{
     overflow-x:hidden;
 
     min-height:100vh;
+    zoom:1.08;
 }
 
 img{
@@ -193,7 +195,54 @@ button{
     padding-bottom:150px;
 }
 
-/* WATCHLIST */
+.topbar{
+    width:min(92%,1600px);
+    margin:0 auto;
+    padding:22px 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    flex-shrink:0;
+}
+
+.brand-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:2.8rem;
+    font-weight:700;
+    color:#fff;
+    letter-spacing:-2px;
+    white-space:nowrap;
+}
+
+.nav{
+    display:flex;
+    align-items:center;
+    gap:56px;
+}
+
+.nav-wheel{
+    width:52px;
+    height:52px;
+    object-fit:contain;
+    transition:1.2s ease;
+}
+
+.nav-wheel:hover{
+    transform:rotate(360deg);
+}
+
+.brand-title{
+    font-family:'Butler', serif;
+    font-size:2.6rem;
+    font-weight:700;
+    letter-spacing:-1px;
+}
 
 .watchlist{
 
@@ -203,45 +252,39 @@ button{
 .watchlist-head{
 
     display:flex;
-
-    justify-content:space-between;
-
+    justify-content:flex-end;
     align-items:center;
-
-    margin-bottom:40px;
+    margin-bottom:24px;
 }
 
 .watchlist h2{
 
-    font-family:
-    'Cormorant Garamond',
-    serif;
-
+    font-family:'Butler', serif;
     font-size:4rem;
-
-    font-style:italic;
-
     font-weight:600;
+    font-style:italic;
 }
 
 .expand-btn{
-
+    background:transparent;
     border:none;
-
-    background:none;
-
     color:var(--accent);
-
+    font-size:.9rem;
+    font-weight:600;
+    letter-spacing:.12em;
+    text-transform:uppercase;
     cursor:pointer;
+    transition:.25s;
+}
 
-    font-size:.95rem;
-
-    letter-spacing:1px;
+.expand-btn:hover{
+    color:white;
+    transform:translateX(4px);
 }
 
 .tier-section{
     display:grid;
-    grid-template-columns:380px 1fr;
+    grid-template-columns:240px 1fr;
     gap:40px;
     margin-bottom:80px;
     align-items:start;
@@ -253,7 +296,7 @@ button{
 
 .tier-title{
     font-family:'Cinzel',serif;
-    font-size:3.8rem;
+    font-size:3.5rem;
     line-height:.85;
     font-weight:600;
     color:white;
