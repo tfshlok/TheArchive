@@ -17,77 +17,56 @@ toggleBtn.textContent = "Show Watchlist";
 function getState() {
 
     return JSON.parse(
-
         localStorage.getItem(
             "absoluteCinemaState"
         )
-
     ) || {};
 }
 
 function saveState(state) {
 
     localStorage.setItem(
-
         "absoluteCinemaState",
-
         JSON.stringify(state)
-
     );
 }
 
 function getFileState(file) {
 
     const state = getState();
-
     if (!state[file]) {
-
         state[file] = {
-
             status: "unwatched",
-
             tier: null
         };
-
         saveState(state);
     }
-
     return state[file];
 }
 
 function moveFile(file, target) {
 
     const state = getState();
-
     if (!state[file]) {
-
         state[file] = {
-
             status: "unwatched",
-
             tier: null
         };
     }
 
     if (target === "unwatched") {
-
         state[file].status =
             "unwatched";
-
         state[file].tier =
             null;
     }
     else {
-
         state[file].status =
             "watched";
-
         state[file].tier =
             target;
     }
-
     saveState(state);
-
     render();
 }
 
@@ -99,20 +78,13 @@ function imagePath(category, file) {
 function formatTitle(filename) {
 
     return filename
-
         .replace(/\.[^/.]+$/, "")
-
         .split("-")
-
         .map(word =>
-
             word.charAt(0)
                 .toUpperCase()
-
             + word.slice(1)
-
         )
-
         .join(" ");
 }
 
@@ -120,12 +92,9 @@ function createCard(category, file) {
 
     const card =
         document.createElement("div");
-
     card.className =
         "poster-card";
-
     card.innerHTML = `
-
         <img
             src="${imagePath(
         category,
@@ -133,96 +102,62 @@ function createCard(category, file) {
     )}"
             alt="${formatTitle(file)}"
         >
-
         <div class="poster-info">
-
             <div class="poster-title">
-
                 ${formatTitle(file)}
-
             </div>
-
         </div>
-
     `;
 
     card.addEventListener(
 
         "contextmenu",
-
         e => {
-
             e.preventDefault();
-
             selectedFile =
                 file;
-
             const menuWidth =
                 230;
-
             const menuHeight =
                 250;
-
             let x =
                 e.clientX;
-
             let y =
                 e.clientY;
-
             if (
-
                 x + menuWidth >
-
                 window.innerWidth
-
             ) {
-
                 x =
-
                     window.innerWidth
-
                     - menuWidth
-
                     - 15;
             }
-
             if (
-
                 y + menuHeight >
-
                 window.innerHeight
-
             ) {
-
                 y =
-
                     window.innerHeight
-
                     - menuHeight
-
                     - 15;
             }
 
             contextMenu.style.display =
                 "block";
-
             contextMenu.style.left =
                 x + "px";
-
             contextMenu.style.top =
                 y + "px";
         }
     );
-
     return card;
 }
 
 function renderTierSection(
 
     sectionId,
-
     title,
-
     tierKey
 
 ) {
@@ -231,66 +166,41 @@ function renderTierSection(
         document.getElementById(
             sectionId
         );
-
     const files =
         MEDIA[currentCategory] || [];
-
     const tierFiles =
-
         files.filter(file => {
-
             const info =
                 getFileState(file);
-
             return (
-
                 info.status ===
                 "watched"
-
                 &&
-
                 info.tier ===
                 tierKey
-
             );
         });
 
     section.innerHTML = `
-
     <div class="tier-left">
-
         <div class="tier-title">
-
             ${title}
-
         </div>
-
     </div>
-
     <div class="poster-grid">
-
     </div>
-
     `;
 
     const grid =
-
         section.querySelector(
             ".poster-grid"
         );
-
     tierFiles.forEach(file => {
-
         grid.appendChild(
-
             createCard(
-
                 currentCategory,
-
                 file
-
             )
-
         );
     });
 }
@@ -298,34 +208,22 @@ function renderTierSection(
 function render() {
 
     const files =
-
         MEDIA[currentCategory]
-
         || [];
-
     watchlistGrid.innerHTML =
         "";
-
     files.forEach(file => {
-
         const info =
             getFileState(file);
-
         if (
             info.status ===
             "unwatched"
         ) {
-
             watchlistGrid.appendChild(
-
                 createCard(
-
                     currentCategory,
-
                     file
-
                 )
-
             );
         }
     });
@@ -333,36 +231,28 @@ function render() {
     renderTierSection(
 
         "absolute-cinema-section",
-
         "Absolute Cinema",
-
         "absolute-cinema"
     );
 
     renderTierSection(
 
         "peak-fiction-section",
-
         "Peak Fiction",
-
         "peak-fiction"
     );
 
     renderTierSection(
 
         "watchable-section",
-
         "Watchable",
-
         "watchable"
     );
 
     renderTierSection(
 
         "waste-of-time-section",
-
         "Waste Of Time",
-
         "waste-of-time"
     );
 }
@@ -374,41 +264,26 @@ document
     )
 
     .forEach(btn => {
-
         btn.addEventListener(
-
             "click",
-
             () => {
-
                 document
-
                     .querySelectorAll(
                         ".nav-btn"
                     )
-
                     .forEach(nav =>
-
                         nav.classList.remove(
                             "active"
                         )
-
                     );
-
                 btn.classList.add(
                     "active"
                 );
-
                 currentCategory =
-
                     btn.dataset.category;
-
                 render();
-
                 window.scrollTo({
-
                     top: 0,
-
                     behavior: "smooth"
                 });
             }
@@ -418,19 +293,13 @@ document
 toggleBtn.addEventListener("click", () => {
 
     watchlistVisible = !watchlistVisible;
-
     if (watchlistVisible) {
-
         watchlistGrid.style.display = "grid";
         toggleBtn.textContent = "Hide Watchlist";
-
     } else {
-
         watchlistGrid.style.display = "none";
         toggleBtn.textContent = "Show Watchlist";
-
     }
-
 });
 
 
@@ -440,27 +309,18 @@ document
     .querySelectorAll(
         "#context-menu button"
     )
-
     .forEach(btn => {
-
         btn.addEventListener(
-
             "click",
-
             () => {
-
                 if (
                     !selectedFile
                 ) return;
 
                 moveFile(
-
                     selectedFile,
-
                     btn.dataset.action
-
                 );
-
                 contextMenu.style.display =
                     "none";
             }
@@ -470,9 +330,7 @@ document
 document.addEventListener(
 
     "click",
-
     () => {
-
         contextMenu.style.display =
             "none";
     }

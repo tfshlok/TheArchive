@@ -1,48 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Absolute Cinema</title>
 
     <link rel="icon" href="assets/mahoraga.png">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Bebas+Neue&display=swap"
         rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
-
 </head>
-
 <body>
 
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
 
     <header class="topbar">
-
         <header class="topbar">
-
             <div class="brand">
-
                 <img src="assets/mahoraga.png" class="nav-wheel" alt="Mahoraga">
 
                 <span class="brand-title">
                     The Archive
                 </span>
-
             </div>
 
             <nav class="nav">
-
                 <button class="nav-btn active" data-category="movies">
                     Movies
+                </button>
+
+                <button class="nav-btn" data-category="animated">
+                    Animated
                 </button>
 
                 <button class="nav-btn" data-category="shows">
@@ -53,31 +46,27 @@
                     Anime
                 </button>
 
-                <button class="nav-btn" data-category="animated">
+                <button class="nav-btn" data-category="animemovies">
                     Anime Movies
                 </button>
 
+                <button class="nav-btn" data-category="manhwa">
+                    Manhwa
+                </button>
             </nav>
-
         </header>
-
     </header>
 
     <main class="content">
-
         <section class="watchlist">
-
             <div class="watchlist-head">
-
                 <button id="toggle-unwatched" class="expand-btn">
                     Show Watchlist
                 </button>
 
             </div>
-
             <div id="unwatched-grid" class="poster-grid hidden">
             </div>
-
         </section>
 
         <section id="absolute-cinema-section" class="tier-section">
@@ -122,5 +111,4 @@
     <script src="main.js"></script>
 
 </body>
-
 </html>
