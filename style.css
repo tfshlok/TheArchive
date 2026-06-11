@@ -67,10 +67,10 @@ button {
     padding-top: 10px;
 }
 
-.nav {
-    display: flex;
-    justify-content: flex-end;
-    gap: 20px;
+.nav{
+    display:flex;
+    align-items:center;
+    gap:25px;
 }
 
 .nav-btn {
@@ -166,7 +166,7 @@ button {
 .topbar {
     width: min(92%, 1600px);
     margin: 0 auto;
-    padding: 22px 0;
+    padding: 15px 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -177,15 +177,14 @@ button {
     align-items: center;
     gap: 5px;
     flex-shrink: 0;
+    margin-left: 30px;
 }
 
-.brand-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 2.8rem;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: -2px;
-    white-space: nowrap;
+.brand-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:2.5rem;
+    font-weight:700;
+    letter-spacing:-2px;
 }
 
 .nav {
@@ -385,4 +384,40 @@ button {
         grid-template-columns:
             repeat(auto-fill, minmax(105px, 1fr));
     }
+}
+
+.watchlist-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:24px;
+}
+
+.region-filter{
+    display:flex;
+    gap:20px;
+}
+
+.region-btn{
+    background:none;
+    border:none;
+    color:var(--muted);
+    font-size:1.1rem;
+    cursor:pointer;
+    transition:.25s;
+    margin-left: 5px;
+}
+
+.region-btn:hover,
+.region-btn.active{
+    color:white;
+}
+
+.region-btn.active{
+    color:white;
+}
+
+.region-filter.hidden{
+    visibility:hidden;
+    pointer-events:none;
 }

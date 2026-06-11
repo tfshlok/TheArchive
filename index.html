@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Absolute Cinema</title>
+    <title>The Archive</title>
 
     <link rel="icon" href="assets/mahoraga.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,11 +60,31 @@
     <main class="content">
         <section class="watchlist">
             <div class="watchlist-head">
-                <button id="toggle-unwatched" class="expand-btn">
-                    Show Watchlist
+
+            <div id="region-filter" class="region-filter">
+
+                <button
+                    class="region-btn active"
+                    data-region="global">
+                    Global
+                </button>
+
+                <button
+                    class="region-btn"
+                    data-region="indian">
+                    Indian
                 </button>
 
             </div>
+
+            <button
+                id="toggle-unwatched"
+                class="expand-btn">
+                Show Watchlist
+            </button>
+
+            </div>
+
             <div id="unwatched-grid" class="poster-grid hidden">
             </div>
         </section>

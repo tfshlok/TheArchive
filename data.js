@@ -1,7 +1,11 @@
 const MEDIA = {
   
   movies: [
-    
+
+  ],
+
+  indianmovies: [
+
   ],
 
   animated: [
@@ -76,7 +80,10 @@ const MEDIA = {
     "you.png",
     "young-sheldon.png",
     "the-mentalist.png",
+    ],
 
+  indianshows: [
+      
   ],
 
   anime: [

@@ -1,6 +1,12 @@
 let currentCategory = "movies";
+let currentRegion = "global";
 let selectedFile = null;
 let watchlistVisible = false;
+
+const regionFilter =
+    document.getElementById(
+        "region-filter"
+    );
 
 const contextMenu =
     document.getElementById("context-menu");
@@ -166,8 +172,19 @@ function renderTierSection(
         document.getElementById(
             sectionId
         );
-    const files =
-        MEDIA[currentCategory] || [];
+    let files = [];
+
+        if(currentCategory === "movies"){
+        files = currentRegion === "global"
+        ? MEDIA.movies
+        : MEDIA.indianmovies;
+        }
+        else if(currentCategory === "shows"){
+            files = currentRegion === "global"
+                ? MEDIA.shows
+                : MEDIA.indianshows;
+        }
+
     const tierFiles =
         files.filter(file => {
             const info =
@@ -207,18 +224,33 @@ function renderTierSection(
 
 function render() {
 
-    const files =
-        MEDIA[currentCategory]
-        || [];
-    watchlistGrid.innerHTML =
-        "";
+    let files = [];
+
+    if(currentCategory === "movies"){
+    files = currentRegion === "global"
+        ? MEDIA.movies
+        : MEDIA.indianmovies;
+    }
+    else if(currentCategory === "shows"){
+        files = currentRegion === "global"
+            ? MEDIA.shows
+            : MEDIA.indianshows;
+    }
+    else{
+
+        files =
+            MEDIA[currentCategory]
+            || [];
+    }
+
+    watchlistGrid.innerHTML = "";
+
     files.forEach(file => {
-        const info =
-            getFileState(file);
-        if (
-            info.status ===
-            "unwatched"
-        ) {
+
+        const info = getFileState(file);
+
+        if (info.status === "unwatched") {
+
             watchlistGrid.appendChild(
                 createCard(
                     currentCategory,
@@ -229,28 +261,24 @@ function render() {
     });
 
     renderTierSection(
-
         "absolute-cinema-section",
         "Absolute Cinema",
         "absolute-cinema"
     );
 
     renderTierSection(
-
         "peak-fiction-section",
         "Peak Fiction",
         "peak-fiction"
     );
 
     renderTierSection(
-
         "watchable-section",
         "Watchable",
         "watchable"
     );
 
     renderTierSection(
-
         "waste-of-time-section",
         "Waste Of Time",
         "waste-of-time"
@@ -258,36 +286,85 @@ function render() {
 }
 
 document
-
-    .querySelectorAll(
-        ".nav-btn"
-    )
-
+    .querySelectorAll(".nav-btn")
     .forEach(btn => {
-        btn.addEventListener(
-            "click",
-            () => {
-                document
-                    .querySelectorAll(
-                        ".nav-btn"
-                    )
-                    .forEach(nav =>
-                        nav.classList.remove(
-                            "active"
-                        )
-                    );
-                btn.classList.add(
-                    "active"
+
+        btn.addEventListener("click", () => {
+
+            document
+                .querySelectorAll(".nav-btn")
+                .forEach(nav =>
+                    nav.classList.remove("active")
                 );
-                currentCategory =
-                    btn.dataset.category;
-                render();
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
+
+            btn.classList.add("active");
+
+            currentCategory =
+            btn.dataset.category;
+
+            if (
+                currentCategory === "movies" ||
+                currentCategory === "shows"
+            ){
+                regionFilter.classList.remove(
+                    "hidden"
+                );
             }
-        );
+            else{
+                regionFilter.classList.add(
+                    "hidden"
+                );
+            }
+
+            render();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    });
+
+document
+    .querySelectorAll(".region-btn")
+    .forEach(btn => {
+
+        btn.addEventListener("click", () => {
+
+            document
+                .querySelectorAll(".region-btn")
+                .forEach(item =>
+                    item.classList.remove("active")
+                );
+
+            btn.classList.add("active");
+
+            currentRegion =
+                btn.dataset.region;
+
+            render();
+        });
+    });
+
+document
+    .querySelectorAll(".sub-btn")
+    .forEach(btn => {
+
+        btn.addEventListener("click", () => {
+
+            document
+                .querySelectorAll(".sub-btn")
+                .forEach(sub =>
+                    sub.classList.remove("active")
+                );
+
+            btn.classList.add("active");
+
+            currentSubCategory =
+                btn.dataset.sub;
+
+            render();
+        });
     });
 
 toggleBtn.addEventListener("click", () => {
@@ -301,8 +378,6 @@ toggleBtn.addEventListener("click", () => {
         toggleBtn.textContent = "Show Watchlist";
     }
 });
-
-
 
 document
 
@@ -336,4 +411,21 @@ document.addEventListener(
     }
 );
 
-render();
+if (regionFilter) {
+    if (
+        currentCategory === "movies" ||
+        currentCategory === "shows"
+    ) {
+        regionFilter.classList.remove("hidden");
+    } else {
+        regionFilter.classList.add("hidden");
+    }
+}
+window.addEventListener("load", () => {
+    render();
+    console.log(
+    "render",
+    currentCategory,
+    currentRegion
+);  
+});
